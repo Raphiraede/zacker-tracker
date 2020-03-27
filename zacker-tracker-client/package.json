@@ -15,6 +15,7 @@
     "react": "16.9.0",
     "react-chartist": "0.13.3",
     "react-dom": "16.9.0",
+    "react-google-login": "^5.1.2",
     "react-google-maps": "9.4.5",
     "react-router-dom": "5.0.1",
     "react-scripts": "3.1.0",
@@ -41,7 +42,6 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/material-dashboard-react/issues"
   },
-  "homepage": "https://creativetimofficial.github.io/material-dashboard-react/#/dashboard",
   "optionalDependencies": {
     "@types/googlemaps": "3.37.3",
     "@types/markerclustererplus": "2.1.33",
@@ -62,5 +62,6 @@
       "not op_mini all"
     ],
     "development": []
-  }
+  },
+  "proxy": "http://localhost:3000"
 }
