@@ -74,22 +74,22 @@ function fakeGoogleAuth(e){
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(raphiInfo)
+  }).then(response => {
+    console.log('response:')
+    console.log(response)
   })
   e.preventDefault()
 }
 
-// function onLoginSuccess(response){
-//   response = JSON.stringify(response)
-//   console.log(response)
-//   fetch('/login-info', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   }).then(response =>{
-//     console.log(response)
-//   })
-// }
+function onLoginSuccess(response){
+  fetch('/users/google-sign-in', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(response)
+  })
+}
 
 function onLoginFailure(response){
   console.log(response)
@@ -113,16 +113,16 @@ function SignInPage() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          <button 
+          {/* <button 
             onClick={fakeGoogleAuth}
-          />
-          {/* <GoogleLogin
+          /> */}
+          <GoogleLogin
             clientId="577630866973-k79pd0gm56ejomv467j4c00o638vov4c.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={onLoginSuccess}
             onFailure={onLoginFailure}
             cookiePolicy={'single_host_origin'}
-          /> */}
+          />
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
