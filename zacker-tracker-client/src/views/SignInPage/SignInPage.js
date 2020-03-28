@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
 // }
 
 function fakeGoogleAuth(e){
-  console.log('FakeGoogleAuthCalled')
+  console.log('FakeGoogleAuth called')
   console.log('RaphiInfo:')
   console.log(raphiInfo)
   fetch('/users/login-info', {
@@ -82,6 +82,7 @@ function fakeGoogleAuth(e){
 }
 
 function onLoginSuccess(response){
+  console.log('onLoginSuccess called')
   fetch('/users/google-sign-in', {
     method: 'POST',
     headers: {

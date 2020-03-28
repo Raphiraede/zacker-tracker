@@ -22,7 +22,6 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 
 // core components
 import Admin from "layouts/Admin.js";
-import RTL from "layouts/RTL.js";
 import { SignInPage } from "views/SignInPage/SignInPage";
 
 import "assets/css/material-dashboard-react.css?v=1.8.0";
@@ -34,7 +33,6 @@ ReactDOM.render(
   <Router history={hist}>
     <Switch>
       <Route path="/admin" component={Admin} />
-      <Route path="/rtl" component={RTL} />
       <Route path="/login" component={SignInPage} />
       <Redirect from="/" to="/login" />
     </Switch>
