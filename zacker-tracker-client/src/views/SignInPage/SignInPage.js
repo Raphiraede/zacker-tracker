@@ -101,6 +101,10 @@ function testFunction(){
   })
 }
 
+function redirectToGoogleAuth(){
+  window.location.pathname = '/auth/google/callback'
+}
+
 function SignInPage() {
   const classes = useStyles()
 
@@ -122,6 +126,7 @@ function SignInPage() {
           variant="contained"
           color="primary"
           className={classes.button}
+          onClick={redirectToGoogleAuth}
         >
           Sign in With Google
         </Button>

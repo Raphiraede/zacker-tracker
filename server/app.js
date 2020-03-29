@@ -68,7 +68,7 @@ app.get('/auth/google/callback',
   (req, res) => {
     console.log('wooo we authenticated, here is our user object:', req.user);
     // res.json(req.user);
-    res.redirect('/admin');
+    res.redirect('/admin/dashboard');
   }
 );
 
