@@ -95,6 +95,18 @@ function onLoginFailure(response){
   console.log(response)
 }
 
+function testOnClick(){
+  fetch('/auth/google/callback',
+  {
+    method: 'GET',
+  }).then((response) => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
+
 function SignInPage() {
   const classes = useStyles()
 
@@ -113,15 +125,15 @@ function SignInPage() {
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           />
-          {/* <button 
-            onClick={fakeGoogleAuth}
-          /> */}
-          <GoogleLogin
+          {/* <GoogleLogin
             clientId="577630866973-k79pd0gm56ejomv467j4c00o638vov4c.apps.googleusercontent.com"
             buttonText="Login"
             onSuccess={onLoginSuccess}
             onFailure={onLoginFailure}
             cookiePolicy={'single_host_origin'}
+          /> */}
+          <Button 
+            onClick={testOnClick}
           />
           <Grid container>
             <Grid item xs>
