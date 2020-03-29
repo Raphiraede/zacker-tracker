@@ -18,6 +18,8 @@
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
+import Work from "@material-ui/icons/Work";
+import More from "@material-ui/icons/More";
 import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import BubbleChart from "@material-ui/icons/BubbleChart";
 import LocationOn from "@material-ui/icons/LocationOn";
@@ -25,6 +27,8 @@ import Notifications from "@material-ui/icons/Notifications";
 // core components/views for Admin layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
+import MyProjectsPage from "views/MyProjects/MyProjects.js";
+import MyTicketsPage from "views/MyTickets/MyTickets.js";
 // core components/views for RTL layout
 
 const dashboardRoutes = [
@@ -42,6 +46,20 @@ const dashboardRoutes = [
     component: UserProfile,
     layout: "/admin"
   },
+  {
+    path: "/projects",
+    name: "My Projects",
+    icon: Work,
+    component: MyProjectsPage,
+    layout: "/admin"
+  },
+  {
+    path: "/tickets",
+    name: "My Tickets",
+    icon: More,
+    component: MyTicketsPage,
+    layout: "/admin"
+  }
 ];
 
 export default dashboardRoutes;
