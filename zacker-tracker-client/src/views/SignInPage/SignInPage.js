@@ -1,19 +1,13 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
 import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import TextField from '@material-ui/core/TextField'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Checkbox from '@material-ui/core/Checkbox'
 import Link from '@material-ui/core/Link'
-import Grid from '@material-ui/core/Grid'
 import Box from '@material-ui/core/Box'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-import raphiInfo from '../../raphiInfo.json'
 
 
 function Copyright() {
@@ -48,58 +42,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2),
   },
 }))
-
-// function useFetch(url){
-//   const [data, updateData] = useState(undefined)
-//   useEffect(
-//     () => {
-//       async function fetchData() {
-//         const response = await fetch(url)
-//         const json = await response.json()
-//         //updateData(json)
-//       }
-//       //fetchData()
-//     },
-//     [url]
-//   )
-// }
-
-function fakeGoogleAuth(e){
-  console.log('FakeGoogleAuth called')
-  console.log('RaphiInfo:')
-  console.log(raphiInfo)
-  fetch('/users/login-info', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(raphiInfo)
-  }).then(response => {
-    console.log('response:')
-    console.log(response)
-  })
-  e.preventDefault()
-}
-
-function onLoginSuccess(response){
-  fetch('/users/google-sign-in', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(response)
-  })
-}
-
-function onLoginFailure(response){
-  console.log(response)
-}
-
-function testFunction(){
-  fetch('/auth/google/callback', {
-    method: 'GET'
-  })
-}
 
 function redirectToGoogleAuth(){
   window.location.pathname = '/auth/google/callback'
