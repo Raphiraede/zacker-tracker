@@ -82,7 +82,6 @@ function fakeGoogleAuth(e){
 }
 
 function onLoginSuccess(response){
-  console.log('onLoginSuccess called')
   fetch('/users/google-sign-in', {
     method: 'POST',
     headers: {

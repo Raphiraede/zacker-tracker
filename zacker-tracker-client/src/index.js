@@ -17,6 +17,7 @@
 */
 import React from "react";
 import ReactDOM from "react-dom";
+import { rootReducer } from './redux/reducers/rootReducer'
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 
@@ -24,18 +25,34 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import Admin from "layouts/Admin.js";
 import { SignInPage } from "views/SignInPage/SignInPage";
 
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
 import "assets/css/material-dashboard-react.css?v=1.8.0";
 
+const initialState = {
+  test: "testing",
+  number: 1,
+}
+const store = createStore(
+  rootReducer,
+  initialState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
+console.log(store)
 
 const hist = createBrowserHistory();
 
 ReactDOM.render(
-  <Router history={hist}>
-    <Switch>
-      <Route path="/admin" component={Admin} />
-      <Route path="/login" component={SignInPage} />
-      <Redirect from="/" to="/login" />
-    </Switch>
-  </Router>,
+  <Provider store={store}>
+    <Router history={hist}>
+      <Switch>
+        <Route path="/admin" component={Admin} />
+        <Route path="/login" component={SignInPage} />
+        <Redirect from="/" to="/login" />
+      </Switch>
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
