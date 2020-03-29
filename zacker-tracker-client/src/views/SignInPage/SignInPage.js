@@ -13,15 +13,15 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
-import GoogleLogin from 'react-google-login'
 import raphiInfo from '../../raphiInfo.json'
+
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        Zacker Tracker
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -95,15 +95,9 @@ function onLoginFailure(response){
   console.log(response)
 }
 
-function testOnClick(){
-  fetch('/auth/google/callback',
-  {
-    method: 'GET',
-  }).then((response) => {
-    console.log(response)
-  })
-  .catch(error => {
-    console.log(error)
+function testFunction(){
+  fetch('/auth/google/callback', {
+    method: 'GET'
   })
 }
 
@@ -117,37 +111,20 @@ function SignInPage() {
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
+        <div className={classes.typo}>
+          <h1>Zacker Tracker</h1>
+        </div>
         <Typography component="h1" variant="h5">
-          Sign in
+          Welcome
         </Typography>
-        <form className={classes.form} noValidate>
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          {/* <GoogleLogin
-            clientId="577630866973-k79pd0gm56ejomv467j4c00o638vov4c.apps.googleusercontent.com"
-            buttonText="Login"
-            onSuccess={onLoginSuccess}
-            onFailure={onLoginFailure}
-            cookiePolicy={'single_host_origin'}
-          /> */}
-          <Button 
-            onClick={testOnClick}
-          />
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+        >
+          Sign in With Google
+        </Button>
       </div>
       <Box mt={8}>
         <Copyright />
