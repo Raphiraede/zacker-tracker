@@ -8,6 +8,8 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy; 
 const session = require('express-session');
 
+const bodyParser = require('body-parser')
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,16 +25,21 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
 }));
-app.use(passport.initialize());  
-app.use(passport.session());
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 passport.serializeUser((user, done) => {  
-  done(null, user);
-});
+  done(null, user)
+})
 
 passport.deserializeUser((userDataFromCookie, done) => {  
   done(null, userDataFromCookie);
-});
+})
 
 // Checks if a user is logged in
 const accessProtectionMiddleware = (req, res, next) => {  
@@ -41,9 +48,9 @@ const accessProtectionMiddleware = (req, res, next) => {
   } else {
     res.status(403).json({
       message: 'must be logged in to continue',
-    });
+    })
   }
-};
+}
 
 // Set up passport strategy
 passport.use(new GoogleStrategy(  
@@ -57,7 +64,7 @@ passport.use(new GoogleStrategy(
     console.log('Our user authenticated with Google, and Google sent us back this profile info identifying the authenticated user:', profile);
     return cb(null, profile);
   },
-));
+))
 
 // Create API endpoints
 
@@ -67,17 +74,28 @@ app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/', session: true }),
   (req, res) => {
     console.log('wooo we authenticated, here is our user object:', req.user);
-    // res.json(req.user);
-    res.redirect('/admin/dashboard');
+    //res.json(req.user);
+    res.redirect('/create-user');
   }
-);
+)
+
+app.post('/auth/signup', accessProtectionMiddleware, (req, res) => {
+  console.log('/auth/signup endpoint hit')
+  console.log(req.user)
+  console.log(req.body)
+  res.send('success')
+})
 
 app.get('/protected', accessProtectionMiddleware, (req, res) => {  
+  console.log('request:', req)
+  console.log('request.user:', req.user)
   res.json({
     message: 'You have accessed the protected endpoint!',
     yourUserInfo: req.user,
-  });
-});
+  })
+})
+
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -86,13 +104,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.static(path.join(__dirname, 'build')));
+
 app.get('/*', (req, res) => {
-  console.log('/* hit')
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -109,8 +129,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-
 
 module.exports = app;
 

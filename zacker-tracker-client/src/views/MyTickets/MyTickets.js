@@ -37,7 +37,7 @@ const styles = {
       lineHeight: "1"
     }
   }
-};
+}
 
 const useStyles = makeStyles(styles);
 

@@ -38,16 +38,31 @@ import {
 } from "variables/charts.js";
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js";
+import { Button } from "@material-ui/core";
+import { testAction, testFetch } from "redux/actions/actions.js"
+import { connect } from "react-redux";
 
 const useStyles = makeStyles(styles);
 
-export default function Dashboard() {
+function Dashboard(props){
   const classes = useStyles();
   return (
     <div>
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
+            <Button
+              color="primary"
+              onClick={props.testAction}
+            >
+              Test Action
+            </Button>
+            <Button
+              color="primary"
+              onClick={props.testFetch}
+            >
+              Test Fetch
+            </Button>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
                 <Icon>content_copy</Icon>
@@ -263,3 +278,16 @@ export default function Dashboard() {
     </div>
   );
 }
+
+
+
+function mapDispatchToProps(dispatch){
+  return{
+    testAction: () => dispatch(testAction()),
+    testFetch: () => dispatch(testFetch()),
+  }
+}
+
+const DashboardContainer = connect (undefined, mapDispatchToProps)(Dashboard)
+
+export default DashboardContainer

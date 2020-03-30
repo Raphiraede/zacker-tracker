@@ -3,6 +3,7 @@ state = {
     id: '123',
     givenName:'raphael',
     familyName:'raede',
+    profilePicture: '',
   },
   projects: {
     'id1' : {
@@ -15,11 +16,6 @@ state = {
       description: 'issue tracker',
       tickets: ['id1', 'id2']
     },
-  },
-  myTickets: {
-    'id1': {
-      
-    }
   },
   tickets: {
     'id1': {
@@ -38,3 +34,6 @@ state = {
     }
   }
 }
+
+
+create table users (id serial, google_id varchar (20) not null, name varchar (100) not null, email varchar (50) not null, created timestamptz not null, modified timestamptz not null);
