@@ -1,5 +1,5 @@
 state = {
-  primaryUserData:{
+  UserInfo:{
     id: '123',
     givenName:'raphael',
     familyName:'raede',
@@ -36,4 +36,7 @@ state = {
 }
 
 
-create table users (id serial, google_id varchar (20) not null, name varchar (100) not null, email varchar (50) not null, created timestamptz not null, modified timestamptz not null);
+create table users (id serial, google_id varchar (30) not null, name varchar (100) not null, email varchar (50) not null, created timestamptz not null, modified timestamptz not null);
+
+INSERT INTO users VALUES
+  (DEFAULT, '112271574383206669193', 'Raphael Raede', 'Raphiraede@gmail.com', NOW(), NOW());

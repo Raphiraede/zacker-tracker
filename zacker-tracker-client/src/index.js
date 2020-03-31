@@ -17,12 +17,11 @@
 */
 import React from "react";
 import ReactDOM from "react-dom";
-import { rootReducer } from './redux/reducers/rootReducer'
+import rootReducer from './redux/rootReducer'
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 
 // core components
-import Admin from "layouts/Admin.js";
 import { SignInPage } from "views/SignInPage/SignInPage";
 import CreateUser from "views/CreateUser/CreateUser.js"
 
@@ -30,6 +29,7 @@ import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 
 import "assets/css/material-dashboard-react.css?v=1.8.0";
+import HomePage from "layouts/HomePage";
 
 const store = configureStore({
   reducer: rootReducer,
@@ -41,7 +41,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hist}>
       <Switch>
-        <Route path="/admin" component={Admin} />
+        <Route path="/home" component={HomePage} />
         <Route path="/login" component={SignInPage} />
         <Route path="/create-user" component={CreateUser}/>
         <Redirect from="/" to="/login" />

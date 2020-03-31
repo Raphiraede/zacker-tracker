@@ -7,9 +7,9 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { makeStyles } from "@material-ui/core/styles";
 // core components
 import Navbar from "components/Navbars/Navbar.js";
-import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+import { useEffect } from 'react'
+
 
 import routes from "routes.js";
 
@@ -18,12 +18,14 @@ import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 
+import { connect } from 'react-redux'
+
 let ps;
 
 const switchRoutes = (
   <Switch>
     {routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/home") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -34,13 +36,17 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/dashboard" />
+    <Redirect from="/home" to="/home/dashboard" />
   </Switch>
 );
 
 const useStyles = makeStyles(styles);
 
-export default function Admin({ ...rest }) {
+function HomePage({ ...rest }) {
+  console.log(rest)
+  useEffect(() => {
+    
+  })
   // styles
   const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
@@ -120,5 +126,17 @@ export default function Admin({ ...rest }) {
         )}
       </div>
     </div>
-  );
+  )
 }
+
+function mapStateToProps(state){
+  return{
+    userInfo: state.userInfo
+  }
+}
+
+const HomePageContainer = connect(mapStateToProps, undefined)(HomePage)
+
+connect(HomePageContainer)
+
+export default HomePageContainer

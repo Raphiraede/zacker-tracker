@@ -1,8 +1,6 @@
 
 import { createAction } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { connect } from 'react-redux'
-
 
 const testAction = createAction('testAction')
 

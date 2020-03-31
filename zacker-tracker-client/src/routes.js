@@ -20,7 +20,7 @@ import Dashboard from "@material-ui/icons/Dashboard";
 import Person from "@material-ui/icons/Person";
 import Work from "@material-ui/icons/Work";
 import More from "@material-ui/icons/More";
-// core components/views for Admin layout
+// core components/views for home layout
 import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
 import MyProjectsPage from "views/MyProjects/MyProjects.js";
@@ -33,28 +33,28 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: Dashboard,
     component: DashboardPage,
-    layout: "/admin"
+    layout: "/home"
   },
   {
     path: "/user",
     name: "User Profile",
     icon: Person,
     component: UserProfile,
-    layout: "/admin"
+    layout: "/home"
   },
   {
     path: "/projects",
     name: "My Projects",
     icon: Work,
     component: MyProjectsPage,
-    layout: "/admin"
+    layout: "/home"
   },
   {
     path: "/tickets",
     name: "My Tickets",
     icon: More,
     component: MyTicketsPage,
-    layout: "/admin"
+    layout: "/home"
   }
 ];
 

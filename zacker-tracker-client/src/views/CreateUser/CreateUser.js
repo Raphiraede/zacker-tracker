@@ -38,13 +38,13 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 export default function CreateUser() {
-  const [input, updateInput] = useState('')
+  const [name, updateName] = useState('')
   function onChange(e){
-    updateInput(e.target.value)
+    updateName(e.target.value)
   }
   function ConfirmName(){
     const body = {
-      "input": input
+      name: name
     }
     fetch('/auth/signup', {
       method: 'POST',
@@ -59,7 +59,6 @@ export default function CreateUser() {
         window.location.pathname='admin/dashboard'
       }
     })
-    
   }
   const classes = useStyles();
   return (
