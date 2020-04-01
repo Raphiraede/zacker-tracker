@@ -9,8 +9,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "components/Navbars/Navbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import { useEffect } from 'react'
-
-
 import routes from "routes.js";
 
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
@@ -19,6 +17,8 @@ import bgImage from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
 
 import { connect } from 'react-redux'
+import { func } from "prop-types";
+import { getUserInfo } from "redux/ducks/auth";
 
 let ps;
 
@@ -45,7 +45,7 @@ const useStyles = makeStyles(styles);
 function HomePage({ ...rest }) {
   console.log(rest)
   useEffect(() => {
-    
+    if(rest.userInfo.status === 'empty dataset') rest.getUserInfo()
   })
   // styles
   const classes = useStyles();
@@ -135,7 +135,13 @@ function mapStateToProps(state){
   }
 }
 
-const HomePageContainer = connect(mapStateToProps, undefined)(HomePage)
+function mapDispatchToProps(dispatch){
+  return{
+    getUserInfo: () => dispatch(getUserInfo())
+  }
+}
+
+const HomePageContainer = connect(mapStateToProps, mapDispatchToProps)(HomePage)
 
 connect(HomePageContainer)
 

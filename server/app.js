@@ -124,20 +124,18 @@ app.post('/auth/signup', accessProtectionMiddleware, (req, res) => {
 app.get('/user-info', accessProtectionMiddleware, (req, res) => {  
   pool.query(`SELECT * FROM users WHERE google_id = '${req.user.id}'`,
     (error, queryResponse) => {
-      if(error) throw error
+      if(error) {
+        console.log(error)
+        throw error
+      }
       else if (queryResponse.rows.length===0){
         res.status(404).send('User does not exist')
       }
       else{
-        res.json(queryResponse)
+        res.json(queryResponse.rows[0])
       }
     }
   )
-
-  res.json({
-    message: 'You have accessed the protected endpoint!',
-    yourUserInfo: req.user,
-  })
 })
 
 app.use(logger('dev'))

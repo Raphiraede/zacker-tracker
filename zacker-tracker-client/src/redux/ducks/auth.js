@@ -2,6 +2,7 @@ import { createReducer } from "@reduxjs/toolkit"
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 
+
 export const getUserInfo = createAsyncThunk(
   'getUserInfo',
   async () => {
@@ -12,16 +13,27 @@ export const getUserInfo = createAsyncThunk(
         credentials: 'same-origin',
       }
     )
-    return response.body
+    return response.json()
   }
 )
 
+const initialState = {
+  status: 'empty dataset',
+  google_id: '',
+  name: '',
+}
 
-const userInfo = createReducer({
+const userInfo = createReducer(initialState, {
   [getUserInfo.pending]: (state, action) => {
   },
   [getUserInfo.fulfilled]: (state, action) => {
-    state.userInfo = action.body
+    console.log('fulfilled')
+    console.log('action:', action)
+    console.log('action.payload:', action.payload)
+    state.status = 'fulfilled'
+    state.google_id = action.payload.google_id
+    state.name = action.payload.name
+    console.log('state:', state)
   },
   [getUserInfo.rejected]: (state, action) => {
   }
