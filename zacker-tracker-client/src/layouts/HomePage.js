@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Navbar from "components/Navbars/Navbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import { useEffect } from 'react'
-import { getUserInfo } from 'redux/ducks/auth.js'
+
 
 import routes from "routes.js";
 
@@ -45,9 +45,7 @@ const useStyles = makeStyles(styles);
 function HomePage({ ...rest }) {
   console.log(rest)
   useEffect(() => {
-    if(!rest.userInfo){
-      rest.getUserInfo()
-    }
+    
   })
   // styles
   const classes = useStyles();
@@ -137,13 +135,7 @@ function mapStateToProps(state){
   }
 }
 
-function mapDispatchToProps(dispatch){
-  return {
-    getUserInfo: () => dispatch(getUserInfo())
-  }
-}
-
-const HomePageContainer = connect(mapStateToProps, mapDispatchToProps)(HomePage)
+const HomePageContainer = connect(mapStateToProps, undefined)(HomePage)
 
 connect(HomePageContainer)
 

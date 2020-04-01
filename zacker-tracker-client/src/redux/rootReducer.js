@@ -1,7 +1,10 @@
 import { combineReducers } from "redux"
 import { userInfo } from './ducks/auth'
 
-const rootReducer = combineReducers({
+const initialState = {
+  userInfo: false
+}
+const rootReducer = combineReducers(initialState, {
   userInfo: userInfo
 })
 
