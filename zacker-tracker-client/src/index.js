@@ -31,6 +31,8 @@ import { configureStore } from '@reduxjs/toolkit'
 import "assets/css/material-dashboard-react.css?v=1.8.0";
 import HomePage from "layouts/HomePage";
 
+console.log(rootReducer)
+
 const store = configureStore({
   reducer: rootReducer,
 })
