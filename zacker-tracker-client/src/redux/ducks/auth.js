@@ -19,7 +19,7 @@ export const getUserInfo = createAsyncThunk(
 
 const initialState = {
   status: 'empty dataset',
-  google_id: '',
+  googleId: '',
   name: '',
 }
 
@@ -27,13 +27,9 @@ const userInfo = createReducer(initialState, {
   [getUserInfo.pending]: (state, action) => {
   },
   [getUserInfo.fulfilled]: (state, action) => {
-    console.log('fulfilled')
-    console.log('action:', action)
-    console.log('action.payload:', action.payload)
     state.status = 'fulfilled'
-    state.google_id = action.payload.google_id
+    state.googleId = action.payload.google_id
     state.name = action.payload.name
-    console.log('state:', state)
   },
   [getUserInfo.rejected]: (state, action) => {
   }

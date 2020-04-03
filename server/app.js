@@ -138,6 +138,45 @@ app.get('/user-info', accessProtectionMiddleware, (req, res) => {
   )
 })
 
+
+app.get('/get-projects', accessProtectionMiddleware, (req, res) => {  
+  pool.query(`SELECT * FROM projects WHERE owner= '${req.user.id}'`,
+    (error, queryResponse) => {
+      if(error) {
+        console.log(error)
+        throw error
+      }
+      else if (queryResponse.rows.length===0){
+        res.status(404).send('No Projects')
+      }
+      else{
+        console.log('project query response:', queryResponse)
+        const responseBody = {
+          queryResponse
+        }
+        res.json(queryResponse)
+      }
+    }
+  )
+})
+
+app.post('/create-project', accessProtectionMiddleware, (req, res) => { 
+  console.log('req.body:', req.body)
+  pool.query(`INSERT INTO projects VALUES
+    (DEFAULT, '${req.body.name}', '${req.body.description}', ${req.user.id}, NOW(), NOW());`,
+    (error, queryResponse) => {
+      if(error) {
+        console.log('There was an error')
+        throw error
+      }
+      else{
+        console.log('project successfully created')
+        res.status(200).send('project successfully inserted into database')
+      }
+    }
+  )
+})
+
 app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))

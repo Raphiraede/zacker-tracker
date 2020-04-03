@@ -25,6 +25,7 @@ import DashboardPage from "views/Dashboard/Dashboard.js";
 import UserProfile from "views/UserProfile/UserProfile.js";
 import MyProjectsPage from "views/MyProjects/MyProjects.js";
 import MyTicketsPage from "views/MyTickets/MyTickets.js";
+import CreateProject from "views/CreateProject/CreateProject.js"
 // core components/views for RTL layout
 
 const dashboardRoutes = [

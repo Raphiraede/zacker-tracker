@@ -39,28 +39,21 @@ import {
 
 import styles from "assets/jss/material-dashboard-react/views/dashboardStyle.js"
 import { Button } from "@material-ui/core"
-import { getUserInfo } from "redux/ducks/actions.js"
+import { getUserInfo } from "redux/ducks/auth.js"
 import { connect } from "react-redux"
-
+import {useEffect} from 'react'
 const useStyles = makeStyles(styles)
 
 function Dashboard(props){
   const classes = useStyles();
+  useEffect(() => {
+    if(props.userInfo.state === 'empty dataset') props.getUserInfo()
+  })
   return (
     <div>
       <GridContainer>
         <GridItem xs={12} sm={6} md={3}>
           <Card>
-            <Button
-              color="primary"
-            >
-              Test Action
-            </Button>
-            <Button
-              color="primary"
-            >
-              Test Fetch
-            </Button>
             <CardHeader color="warning" stats icon>
               <CardIcon color="warning">
                 <Icon>content_copy</Icon>
@@ -277,6 +270,17 @@ function Dashboard(props){
   );
 }
 
-// const DashboardContainer = connect (undefined, mapDispatchToProps)(Dashboard)
+function mapStateToProps(state){
+  return{
+    userInfo: {...state.userInfo}
+  }
+}
+function mapDispatchToProps(dispatch){
+  return{
+    getUserInfo: () => dispatch(getUserInfo())
+  }
+}
 
-export default Dashboard
+const DashboardContainer = connect (mapStateToProps, mapDispatchToProps)(Dashboard)
+
+export default DashboardContainer
