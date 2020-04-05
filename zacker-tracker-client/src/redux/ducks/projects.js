@@ -1,5 +1,4 @@
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
-import { getUserInfo } from "./auth";
 
 export const fetchProjects = createAsyncThunk(
   'fetchProjects',

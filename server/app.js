@@ -14,9 +14,9 @@ const bodyParser = require('body-parser')
 var indexRouter = require('./routes/index')
 var usersRouter = require('./routes/users')
 
-const { Pool } = require('pg')
+const { Pool, Client } = require('pg')
 
-var app = express()
+const app = express()
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -24,6 +24,7 @@ const pool = new Pool({
     rejectUnauthorized: false
   },
 })
+
 
 pool.on('error', (err, client) => {
   console.error('Unexpected error on idle client', err)

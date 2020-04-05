@@ -12,8 +12,9 @@ import Button from "components/CustomButtons/Button.js";
 import CustomInput from "components/CustomInput/CustomInput.js";
 import CardFooter from "components/Card/CardFooter.js";
 import {createNewProject} from "redux/ducks/projects.js"
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { connect } from "react-redux";
+import { fetchProjects } from "redux/ducks/projects";
 
 const styles = {
   cardCategoryWhite: {
@@ -48,15 +49,20 @@ const styles = {
 const useStyles = makeStyles(styles);
 
 function MyProjects(props) {
+
   const classes = useStyles()
+
   const [name, updateName] = useState('')
   const [description, updateDescription] = useState('')
+
+  useEffect(() => {
+    if(props.projects.status === 'empty dataset') props.fetchProjects()
+  })
+
   function onNameChange(e){
     updateName(e.target.value)
-    console.log('name changed to', e.target.value)
   }
   function onDescriptionChange(e){
-    console.log('triggered')
     updateDescription(e.target.value)
   }
   return (
@@ -143,7 +149,8 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return{
-    createNewProject: (payload) => dispatch(createNewProject(payload))
+    createNewProject: (payload) => dispatch(createNewProject(payload)),
+    fetchProjects: (payload) => dispatch(fetchProjects(payload))
   }
 }
 
