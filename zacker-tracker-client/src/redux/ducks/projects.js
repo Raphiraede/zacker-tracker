@@ -1,4 +1,5 @@
 import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
+import moment from 'moment'
 
 export const fetchProjects = createAsyncThunk(
   'fetchProjects',
@@ -32,7 +33,10 @@ const projects = createReducer(initialState, {
     //parsed projects will be a 2d array
     let projectsParsed = []
     action.payload.rows.forEach(row => {
-      const parsedRow = [row.id, row.name, row.description, row.created, row.modified]
+      const parsedCreated = moment(row.created).format("MM-DD-YYYY hh:mm a")
+      const parsedModified = moment(row.modified).format("MM-DD-YYYY hh:mm a")
+      console.log('moment.format', moment().format("MM-DD-YYYY hh:mm a"))
+      const parsedRow = [row.name, row.description, parsedCreated, parsedModified]
       projectsParsed.push(parsedRow)
     })
     state.projectsParsed = projectsParsed
@@ -49,7 +53,6 @@ export const createNewProject = createAsyncThunk(
       name,
       description,
     }
-    console.log('body')
     const response = await fetch(
       '/create-project',
       {

@@ -106,6 +106,7 @@ app.get('/auth/google/callback',
 
 app.post('/auth/signup', accessProtectionMiddleware, (req, res) => {
   console.log('/auth/signup endpoint hit')
+  console.log('req.user:', req.user)
 
   //Name is coming from req.body, not req.user. This is because req.body.name is from when the user had an oppurtunity to change his name
   pool.query(`INSERT INTO users VALUES
